@@ -1,0 +1,64 @@
+<form [formGroup]="employeeForm" (submit)="addEmployee()">
+    <!-- full name -->
+    <mat-form-field class="full-width">
+        <mat-label>Employee Code</mat-label>
+        <input type="text" matInput formControlName="EmpCode" placeholder="Ex. AB0001" />
+        <mat-error *ngIf="employeeForm.get('EmpCode').hasError('required')">
+            Employee Code is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="employeeForm.get('EmpCode').hasError('minlength') || employeeForm.get('EmpCode').hasError('maxlength')">
+            Please enter 6 Character Employee Code
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-label>Full Name</mat-label>
+        <input type="text" matInput formControlName="EmpName" placeholder="Ex. Prabath Madhuranga" />
+        <mat-error *ngIf="employeeForm.get('EmpName').hasError('required')">
+            Full Name is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="EmpEmail" placeholder="Ex. mail@gmail.com" />
+        <mat-error *ngIf="employeeForm.get('EmpEmail').hasError('email')">
+            Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="employeeForm.get('EmpEmail').hasError('required')">
+            Email is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-label>Date of Birth</mat-label>
+        <input matInput formControlName="EmpDOB" [matDatepicker]="picker" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Employee Type</mat-label>
+        <mat-select formControlName="EmpType">
+          <mat-option *ngFor="let type of employerTypes" [value]="type.code">
+            {{ type.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="employeeForm.get('EmpType').hasError('required')">Please choose Employee Type</mat-error>
+      </mat-form-field>
+
+    <mat-radio-group class="full-width" formControlName="EmpGender">
+        <label class="mx-3">Select Gender: </label>
+        <mat-radio-button class="mx-2" value="M"> Male </mat-radio-button>
+        <mat-radio-button class="mx-2" value="F"> Female </mat-radio-button>
+    </mat-radio-group><br>
+    <input class="example-margin" type="checkbox" (change)="onChange($event.target.checked)" /> <span>Is Active</span>
+    <br>
+    <br>
+    <ng-container>
+        <button style="margin-left: 20%;" type="submit" mat-raised-button color="primary" [disabled]="employeeForm.invalid">Submit</button> 
+    
+        <button (click)="reset();"  type="reset" mat-raised-button style="margin-right: 20%; float: right; color: white; background-color: darkorange;">Reset</button> 
+    </ng-container>
+    <form></form>
+</form>

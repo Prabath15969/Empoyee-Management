@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Assignment';
+
+  list = [
+    {id:1 , empName: "Prabath" , empAddress: "Akuressa", empCity: "Matara"},
+    {id:1 , empName: "Prabath" , empAddress: "Akuressa", empCity: "Matara"},
+    {id:1 , empName: "Prabath" , empAddress: "Akuressa", empCity: "Matara"}
+  ]
+
 }
