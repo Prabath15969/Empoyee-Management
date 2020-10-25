@@ -1,5 +1,4 @@
 export class Employee {
-
     Id :number;
     EmpCode: string;
     EmpName: string;

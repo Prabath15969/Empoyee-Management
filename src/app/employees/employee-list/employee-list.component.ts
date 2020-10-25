@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { MatTableDataSource, MatDialog, MatSort, MatPaginator } from "@angular/material";
+import { MatTableDataSource, MatDialog, MatSort, MatPaginator, MatDialogConfig } from "@angular/material";
 import { Employee } from "src/app/models/employee.model";
 import { AddEmployeeComponent } from "../add-employee/add-employee.component";
 import { DataSource } from '@angular/cdk/table';
+import { DeleteConfirmComponent } from 'src/app/delete-confirm/delete-confirm.component';
+import { EmployeeService } from 'src/app/services/employee.service';
 
 
 
@@ -33,9 +35,9 @@ export class EmployeeListComponent implements OnInit {
   
   
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private service: EmployeeService) {}
 
-  dataSource: MatTableDataSource<any>;
+  dataSource: MatTableDataSource<Employee>;
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
@@ -43,76 +45,50 @@ export class EmployeeListComponent implements OnInit {
   }
 
   ngOnInit() {
-    let array= [
-      {
-        Id: 1,
-        EmpName: "sa",
-        EmpCode: "AB0001",
-        EmpEmail: "aef",
-        EmpDOB: new Date("2019-05-27"),
-        EmpGender: "M",
-        EmpType: "VDE",
-        EmpActive: true,
-      },
-      {
-        Id: 2,
-        EmpName: "sa",
-        EmpCode: "AB0002",
-        EmpEmail: "aef",
-        EmpDOB: new Date("2020-05-27"),
-        EmpGender: "M",
-        EmpType: "VDE",
-        EmpActive: true,
-      },
-      {
-        Id: 3,
-        EmpName: "sa",
-        EmpCode: "AB0003",
-        EmpEmail: "aef",
-        EmpDOB: new Date("2019-06-27"),
-        EmpGender: "M",
-        EmpType: "VDE",
-        EmpActive: true,
-      },
-      {
-        Id: 1,
-        EmpName: "sa",
-        EmpCode: "XY0001",
-        EmpEmail: "aef",
-        EmpDOB: new Date("2019-05-28"),
-        EmpGender: "M",
-        EmpType: "VDE",
-        EmpActive: true,
-      },
-      {
-        Id: 1,
-        EmpName: "sa",
-        EmpCode: "XY0002",
-        EmpEmail: "aef",
-        EmpDOB: new Date("2019-05-27"),
-        EmpGender: "M",
-        EmpType: "VDE",
-        EmpActive: true,
-      },
-      {
-        Id: 6,
-        EmpName: "sa",
-        EmpCode: "XY1245",
-        EmpEmail: "aef",
-        EmpDOB: new Date("2019-07-27"),
-        EmpGender: "M",
-        EmpType: "VDE",
-        EmpActive: true,
-      },
-    ];
-    this.dataSource = new MatTableDataSource(array);
+    // this.service.GetMasterEmployees().subscribe(res => {
+    //   this.dataSource.data = res as any[];
+      
+    // this.dataSource.sort = this.sort;
+    // })
+    this.dataSource = new MatTableDataSource(this.service.array);
     this.dataSource.sort = this.sort;
+       
   }
   addEmployee() {
-    this.dialog.open(AddEmployeeComponent, {
-      width: "50%",
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.width = "50%";
+    dialogConfig.data = {
+      update: false
+    }
+
+    this.dialog.open(AddEmployeeComponent, dialogConfig);
+  }
+  editEmployee(data : string){
+
+    const dialogConfig = new MatDialogConfig();
+    
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "50%";
+    dialogConfig.data = {
+      empdata: data,
+      update: true
+    }
+
+    this.dialog.open(AddEmployeeComponent, dialogConfig);
+  }
+
+  delete(data : Employee){
+    const dialogConfig = new MatDialogConfig();
+    
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width = "50%";
+    dialogConfig.data = {
+      emp: data,
       
-    });
+    }
+    this.dialog.open(DeleteConfirmComponent, dialogConfig);
   }
 
   applyFilter(filterValue: string) {

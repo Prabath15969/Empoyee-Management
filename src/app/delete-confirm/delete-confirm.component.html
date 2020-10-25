@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Are You Sure!</h2>
+<mat-dialog-content><span>If you confirm cannot undo</span></mat-dialog-content>
+
+<mat-dialog-actions>
+  <ng-container>
+    <button class="mat-raised-button" (click)="close()">Close</button>
+  </ng-container>
+  <ng-container style="float: right;">
+    <button
+    type="button"
+      style="float: right"
+      class="mat-raised-button mat-warn"
+      (click)="delete()"
+    >
+      Delete
+    </button>
+  </ng-container>
+</mat-dialog-actions>

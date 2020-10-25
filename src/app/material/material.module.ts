@@ -93,6 +93,7 @@ import { MatSortModule, MatNativeDateModule } from '@angular/material';
     MatButtonToggleModule,
     MatSortModule,
     MatNativeDateModule,
+    MatDialogModule
   ],
   
 })

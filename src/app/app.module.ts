@@ -8,7 +8,10 @@ import { AddEmployeeComponent } from './employees/add-employee/add-employee.comp
 import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { EmployeeTypeListComponent } from './employees/employee-type-list/employee-type-list.component';
-import { EmployeeTypeAddComponent } from './employees/employee-type-add/employee-type-add.component'
+import { EmployeeTypeAddComponent } from './employees/employee-type-add/employee-type-add.component';
+import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.component'
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -17,6 +20,7 @@ import { EmployeeTypeAddComponent } from './employees/employee-type-add/employee
     AddEmployeeComponent,
     EmployeeTypeListComponent,
     EmployeeTypeAddComponent,
+    DeleteConfirmComponent,
     
   ],
   imports: [
@@ -24,11 +28,13 @@ import { EmployeeTypeAddComponent } from './employees/employee-type-add/employee
     AppRoutingModule,
     NoopAnimationsModule,
     BrowserAnimationsModule, 
-    MaterialModule
+    MaterialModule,
+    HttpClientModule,
   ],
   entryComponents: [
     AddEmployeeComponent,
-    EmployeeTypeAddComponent
+    EmployeeTypeAddComponent,
+    DeleteConfirmComponent
   ],
   
   providers: [],
