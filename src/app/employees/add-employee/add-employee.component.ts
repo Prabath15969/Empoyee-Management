@@ -94,7 +94,7 @@ export class AddEmployeeComponent implements OnInit {
 
   addEmployee(isupdate : boolean){
     const data = {
-      Id:this.empdata.Id,
+      Id:0,
       EmpCode: this.EmpCode.value,
       EmpName: this.EmpName.value,
       EmpEmail: this.EmpEmail.value,
@@ -106,14 +106,14 @@ export class AddEmployeeComponent implements OnInit {
     console.log(data)
     if(isupdate){
       console.log("update");
-      this.service.EditMasterEmployee(data).subscribe(res => {
-        console.log(res);
-       })
+      // this.service.EditMasterEmployee(data).subscribe(res => {
+      //   console.log(res);
+      //  })
     }else{
       console.log("Add")
-      this.service.InsertMasterEmployee(data).subscribe(res => {
-       console.log(res);
-      })
+      // this.service.InsertMasterEmployee(data).subscribe(res => {
+      //  console.log(res);
+      // })
     }
     
   }
